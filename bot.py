@@ -21,7 +21,8 @@ def start(bot, update):
     )
 
 def echo(bot, update):
-  msg = "Voce Digitou: " + update.message.text
+  msg = update.message.text
+  print(msg)
   vetormsg = [msg]
   predicts = count_vector.transform(vetormsg).toarray()
   array = naive_bayes.predict(predicts)
@@ -29,10 +30,8 @@ def echo(bot, update):
   
   if([0]in array):
     bot.send_message(chat_id=update.message.chat_id,text="Você pode melhorar esses pensamentos para algo positivo, meu lider")
-    print(0)
   else:
     bot.send_message(chat_id=update.message.chat_id,text="Estou gostando de ver que você está melhorando")
-    print(1)
 
 
 start_handler = CommandHandler('start', start)
